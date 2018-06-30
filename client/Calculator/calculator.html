@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0
+        }
+    .currency-image {
+        width: 30%;
+        background: black;
+        color: #3388C0;
+        font-size: 20px;
+        margin: auto;
+        box-sizing: border-box;
+        box-shadow: 1px 2px 3px #fef1fe
+    }
+    .caculator {
+        display: grid;
+        padding: 20px;
+        grid-template-areas: 'clearBtn input input input'
+                            'numb1 numb2 numb3 plus'
+                            'numb4 numb5 numb6 minus'
+                            'numb7 numb8 numb9 divide'
+                            'numb0 dot equal multiply';
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+        box-sizing: border-box;
+        justify-items: center
+    }
+    .caculator div:not(#calc) {
+        background: #171533;
+        padding: 20px;
+        cursor: pointer;
+    }
+    .caculator div:not(#calc):hover {
+        box-shadow: 1px 2px 3px #171654
+    }
+    .caculator div:not(#calc):active {
+        padding: 19px;
+        box-shadow: 2px 0px 3px #171614;
+        color: green
+    }
+
+    #calc { 
+        grid-area: input;
+        background: #BCCD95;
+        color: #B71567;
+        width: 90%;
+        max-width: 90%;
+        padding-right: 5px;
+        text-align: right;
+        cursor: text;
+        display: grid;
+    }
+    #calc-input {
+        text-overflow: scrollX;
+        width: 100%;
+        font-size: 16px
+    }
+    #del { grid-area: clearBtn}
+    #numb1 {grid-area: numb1}
+    #numb2 {grid-area: numb2}
+    #numb3 {grid-area: numb3}
+    #numb4 {grid-area: numb4}
+    #numb5 {grid-area: numb5}
+    #numb6 {grid-area: numb6}
+    #numb7 {grid-area: numb7}
+    #numb8 {grid-area: numb8}
+    #numb9 {grid-area: numb9}
+    #numb0 {grid-area: numb0}
+    #plus {grid-area: plus}
+    #minus {grid-area: minus}
+    #equal {grid-area: equal}
+    #divide {grid-area: divide}
+    #dot {grid-area: dot}
+    #multiply {grid-area: multiply}  
+    </style>
+</head>
+<body>
+    <div class="currency-image">
+        <div class="caculator">
+            <div id="del">C</div>
+            <div id="calc"><span id="calc-input">0</span><span id="calc-answer">0</span></div>
+            <div id='numb1' data-ng-keydown="49" ng-keypress="49">1</div>
+            <div id="numb2">2</div>
+            <div id="numb3">3</div>
+            <div id="numb4">4</div>
+            <div id="numb5">5</div>
+            <div id="numb6">6</div>
+            <div id="numb7">7</div>
+            <div id="numb8">8</div>
+            <div id="numb9">9</div>
+            <div id="numb0">0</div>
+            <div id="plus">+</div>
+            <div id="minus">-</div>
+            <div id="divide">/</div>
+            <div id="equal">=</div>
+            <div id="multiply">*</div>
+            <div id="dot">.</div>
+        </div>
+    </div>
+    <div id="inp">
+        <input type="text" name="" id="">
+    </div>
+</body>
+<script>
+    const delBtn = document.querySelector('#del');
+    const calcInput = document.querySelector('#calc-input');
+    const calcAnswer = document.querySelector('#calc-answer');
+    /* number keypress */
+    const numb0 = document.querySelector('#numb0')
+    const numb1 = document.querySelector('#numb1')
+    const numb2 = document.querySelector('#numb2')
+    const numb3 = document.querySelector('#numb3')
+    const numb4 = document.querySelector('#numb4')
+    const numb5 = document.querySelector('#numb5')
+    const numb6 = document.querySelector('#numb6')
+    const numb7 = document.querySelector('#numb7')
+    const numb8 = document.querySelector('#numb8')
+    const numb9 = document.querySelector('#numb9')
+    /* keypress for signs */
+    const plus = document.querySelector('#plus')
+    const multiply = document.querySelector('#multiply')
+    const dot = document.querySelector('#dot')
+    const divide = document.querySelector('#divide')
+    const minus = document.querySelector('#minus')
+    const equal = document.querySelector('#equal')
+
+    delBtn.addEventListener('click',function () {
+        // for click effect
+        delBtn.style.padding = 19.5 + 'px';
+        let retrieveText = calcInput.textContent;
+        let textToArray = retrieveText.split(' ');
+        textToArray.splice(-1, 1); /* start from the end and remove first element */
+        textToString = textToArray.join(' ');
+        retrieveText = textToString; /* reset our retrieve text and append to its parent element*/
+        calcInput.textContent = retrieveText;
+        if(calcInput.textContent === '') {
+            calcInput.textContent = '0';
+            let retrieveCalcAns = calcAnswer.textContent;
+            const answerLenght = retrieveCalcAns.length; /* this is meant to stop deletion of answer after a delete */
+            textToArray = retrieveCalcAns.split('');
+            textToArray.splice(-1, 1);
+            textToString = textToArray.join('');
+            retrieveCalcAns = textToString;
+            calcAnswer.textContent = retrieveCalcAns
+            if ( answerLenght > retrieveCalcAns.length ) {
+                calcAnswer.textContent = '0';
+            }
+        }
+    })
+    numb1.addEventListener('click', function () {
+        const key = ' 1';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb2.addEventListener('click', function () {
+        const key = ' 2';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb3.addEventListener('click', function () {
+        const key = ' 3';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb4.addEventListener('click', function () {
+        const key = ' 4';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb5.addEventListener('click', function () {
+        const key = ' 5';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb6.addEventListener('click', function () {
+        const key = ' 6';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb7.addEventListener('click', function () {
+        const key = ' 7';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb8.addEventListener('click', function () {
+        const key = ' 8';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb9.addEventListener('click', function () {
+        const key = ' 9';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    numb0.addEventListener('click', function () {
+        const key = ' 0';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    plus.addEventListener('click', function () {
+        const key = ' +';
+        let retrieveText = calcInput.textContent;
+        if (calcInput.textContent === '0') {
+            retrieveText = ''
+        }
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    minus.addEventListener('click', function () {
+        const key = ' -';
+        let retrieveText = calcInput.textContent;
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    divide.addEventListener('click', function () {
+        const key = ' /';
+        let retrieveText = calcInput.textContent;
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    multiply.addEventListener('click', function () {
+        const key = ' *';
+        let retrieveText = calcInput.textContent;
+        retrieveText += key;
+        calcInput.textContent = retrieveText
+    })
+    equal.addEventListener('click', function () {
+       delBtn.style.padding = 19.5 + 'px';
+        let retrieveText = calcInput.textContent;
+        let textToArray = retrieveText.split(' ');
+        retrieveText
+    })
+    const inp = document.querySelector('#inp')
+    inp.addEventListener('keypress', function (key) {
+        let r = key
+        console.log(r)
+    })
+</script>
+<script src="../ServiceWorker/serviceWorker.js"></script>
+<script src="../ServiceWorker/sw.js"></script>
+</html>

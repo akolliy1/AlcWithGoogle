@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./client/assets/css/canvas.css">
+    <link rel="stylesheet" href="./client/assets/css/generalStyle.css">
+    <link rel="stylesheet" href="./client/assets/Calculator/calculator.css">
+    <link rel="stylesheet" href="./client/assets/css/dismis-and-refreshbtn.css">
+</head>
+
+<body>
+    <header className='Toolbar'>
+        <div className='Logo'>
+            <div className='Logo'>
+                <canvas></canvas>
+            </div>
+        </div>
+
+        <nav className='DesktopOnly'>
+            <ul className='NavigationItems'>
+                <li className='NavigationItem'>
+                    <a href='' className='active'>Home</a>
+                </li>
+                <li className='NavigationItem'>
+                    <a href='./client/Calculator/calculator.html' className=''>Calculator</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="title">
+            <h3>MONEY</h3>
+            <h2>Check the rate of your money</h2>
+            <p>Input the amount below and change the currency default if needed .</p>
+            <marquee behavior="" direction="">
+                <h2>The default currency You are changing
+                    <span>
+                        <i>TO</i>
+                    </span> is
+                    <strong title="US Dollar">USD</strong>
+                    while the default
+                    <span>
+                        <i>From</i>
+                    </span> is
+                    <strong title="Naira">NGN</strong> .
+                </h2>
+            </marquee>
+        </div>
+        <div class="calculate">
+            <label for="From" id="label1">From</label>
+            <select name="From" id="From">
+                <option value="NGN">NGN</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+            </select>
+            <label for="inputFrom" id="label2">Default price</label>
+            <input type="number" name="From" id="inputFrom" value="1">
+            <label for="To" id="label3">To</label>
+            <select name="To" id="To">
+                <option value="NGN">USD</option>
+                <option value="USD">NGN</option>
+                <option value="EUR">EUR</option>
+            </select>
+            <label for="output" id="label4">Output price:
+                <span>#</span>
+            </label>
+            <input type="text" value="329" name="output" id="output" readonly>
+        </div>
+    </div>
+
+    <div class="currency-image">
+        <div class="caculator">
+            <div id="del">C</div>
+            <div id="calc">
+                <span id="calc-input">0</span>
+                <span id="calc-answer">0</span>
+            </div>
+            <div id='numb1' data-ng-keydown="49" ng-keypress="49">1</div>
+            <div id="numb2">2</div>
+            <div id="numb3">3</div>
+            <div id="numb4">4</div>
+            <div id="numb5">5</div>
+            <div id="numb6">6</div>
+            <div id="numb7">7</div>
+            <div id="numb8">8</div>
+            <div id="numb9">9</div>
+            <div id="numb0">0</div>
+            <div id="plus">+</div>
+            <div id="minus">-</div>
+            <div id="divide">/</div>
+            <div id="equal">=</div>
+            <div id="multiply">*</div>
+            <div id="dot">.</div>
+        </div>
+    </div>
+    <footer>
+        <div id="toast"> New version available <span id="refresh">[ Resfresh</span> , <span id="dismiss">Dismiss ]</span> </div>
+        <div id="retry">[ Unable to connect. Retrying… ]</div>
+    </footer>
+    <script src="./client/assets/js/canvas.js"></script>
+    <script src="./client/ServiceWorker/postView/postView.js"></script>
+    <script src="./client/ServiceWorker/serviceWorker.js"></script>
+    <script src="./client/ServiceWorker/sw.js"></script>
+    <script src="./client/assets/Calculator/calculator.js"></script>
+</body>
+
+</html>
